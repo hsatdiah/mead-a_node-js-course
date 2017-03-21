@@ -24,12 +24,18 @@ axios.get(geocodeUrl).then(response => {
   let lat = response.data.results[0].geometry.location.lat;
   let lng = response.data.results[0].geometry.location.lng;
   let weatherUrl = `https://api.darksky.net/forecast/82a1a91801546e30b279a696dffe7302/${lat},${lng}`;
-  console.log(response.data.results[0].formatted_address);
+  console.log(`\n${response.data.results[0].formatted_address}`);
+  console.log('---')
   return axios.get(weatherUrl);
 }).then((response) => {
-  let temperature = response.data.currently.temperature;
-  let apparentTemperature = response.data.currently.apparentTemperature;
-  console.log(`It's currently ${temperature}. Feels like ${apparentTemperature}.`);
+
+  let temperature = ((response.data.currently.temperature - 32) * 5 / 9).toFixed(2);
+  let apparentTemperature = ((response.data.currently.apparentTemperature - 32) * 5 / 9).toFixed(2);
+  let humidity = response.data.currently.humidity;
+  let windSpeed = response.data.currently.windSpeed;
+
+  console.log(`It's currently ${temperature}. Feels like ${apparentTemperature}`);
+  console.log(`Humidity: ${humidity}; wind speed: ${windSpeed}\n`);
 }).catch(error => {
   if (error.code === 'ENOTFOUND') {
     console.log('Unable to connect to API servers.');
