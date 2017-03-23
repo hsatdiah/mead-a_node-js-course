@@ -14,7 +14,6 @@ let app = express();
 app.set('view engine', 'hbs');
 
 // <Middleware
-app.use(express.static(__dirname + '/public'));
 app.use((req, res, next) => {
   let now = new Date().toString();
   let log = `${now}: ${req.method} ${req.url}`;
@@ -26,6 +25,10 @@ app.use((req, res, next) => {
   });
   next();
 });
+// app.use((req, res, next) => {
+//   res.render('maintenance.hbs');
+// });
+app.use(express.static(__dirname + '/public'));
 // Middleware>
 
 app.get('/', (req, res) => {
@@ -34,13 +37,11 @@ app.get('/', (req, res) => {
     welcomeMessage: 'Милости прошу к нашему шалашу',
   });
 });
-
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
     pageTitle: 'About Page',
   });
 });
-
 app.get('/bad', (req, res) => {
   res.send({
     errorMessage: 'Unable to handle request'
