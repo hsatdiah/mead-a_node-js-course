@@ -12,6 +12,18 @@ it('should square a number', () => {
   expect(res).toBeA('number').toBe(144);
 });
 
+it('should set first and last name to object', () => {
+  let user = utils.setName({
+    age: 25,
+    hobby: 'programming',
+  }, 'Miraya Reie');
+
+  expect(user).toInclude({
+    firstName: 'Miraya',
+    lastName: 'Reie'
+  });
+});
+
 it('should expect some values', () => {
   expect(9).toNotBe(11);
   expect({name: 'Alex'}).toEqual({name: 'Alex'}); // toBe will fail
