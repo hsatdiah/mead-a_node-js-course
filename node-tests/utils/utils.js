@@ -4,7 +4,7 @@ module.exports = {
   asyncAdd: (a, b, callback) => {
     setTimeout(() => {
       callback(a + b);
-    }, 1000);
+    }, 100);
   },
   
   setName: (user, fullName) => {
@@ -16,4 +16,9 @@ module.exports = {
 
   square: a => a * a,
 
+  asyncSquare: (a, callback) => {
+    setTimeout(() => {
+      callback(a * a)
+    }, 100);
+  },
 };
