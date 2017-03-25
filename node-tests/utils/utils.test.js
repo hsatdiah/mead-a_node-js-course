@@ -7,6 +7,13 @@ it('should add two numbers', () => {
   expect(res).toBeA('number').toBe(42);
 });
 
+it('should async add two numbers', (done) => {
+  utils.asyncAdd(4, 3, (sum) => {
+    expect(sum).toBeA('number').toBe(7);
+    done();
+  });
+});
+
 it('should square a number', () => {
   let res = utils.square(12);
   expect(res).toBeA('number').toBe(144);
